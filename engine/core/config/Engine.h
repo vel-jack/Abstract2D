@@ -1,37 +1,52 @@
 #pragma once
 
-#include "core/config/Logger.h"
-
+#include <memory>
 #include <string>
+#include "core/config/Logger.h"
+#include "graphics/Renderer.h"
+#include "scenes/Scene.h"
 
 namespace Abstract2D {
 
 	struct ProjectSettings {
-		std::string Name = "A2D Game";
+		std::string name = "Abstract2D Game";
+		int width = 800;
+		int height = 600;
+		bool vsync = true;
 	};
 
 	class Engine {
 	public:
-		Engine() : Engine(ProjectSettings{}) {}
-		Engine(const ProjectSettings& settings);
+		static Engine& GetInstance() {
+			static Engine instance;
+			return instance;
+		}
+
 		Engine(const Engine&) = delete;
 		Engine& operator=(const Engine&) = delete;
 
-		Engine(const Engine&&) = delete;
-		Engine operator = (Engine&&) = delete;
-
+		// Life cycle
 		bool Init();
 		void Run();
 		void Shutdown();
 
-		static Engine& Get() { return *m_Engine; }
+		// Project Settings
+		void SetProjectSettings(const ProjectSettings& settings);
+		const ProjectSettings& GetProjectSettings() const { return m_settings; }
+
+		// Scene Management
+		void SetActiveScene(std::shared_ptr<Scene> scene) { m_activeScene = scene; }
+
 
 	private:
-		static Engine* m_Engine;
-		bool m_Running = false;
+		Engine() = default;
+		~Engine() = default;
 
-		ProjectSettings m_ProjectSettings;
-
+	private:
+		bool m_isRunning = false;
+		ProjectSettings m_settings;
+		std::unique_ptr<Renderer> m_renderer;
+		std::shared_ptr<Scene> m_activeScene;
 	};
 
-}
+} // namespace Abstract2D

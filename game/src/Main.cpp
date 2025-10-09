@@ -3,10 +3,10 @@
 int main() {
     Game game;
 
-    if (!game.init()) {
+    if (!game.Init()) {
         return -1;
     }
 
-    game.run();
+    game.Run();
     return 0;
 }

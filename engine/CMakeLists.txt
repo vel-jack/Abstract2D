@@ -3,11 +3,16 @@ set(ENGINE_NAME Abstract2DEngine)
 file(GLOB_RECURSE ENGINE_SOURCES
     core/*.cpp
     core/config/*.cpp
+    nodes/*.cpp
+    scenes/*.cpp
 )
 
 file(GLOB_RECURSE ENGINE_HEADERS
     core/*.h
-    core/config/*.h
+    graphics/*.h
+    math/*.h
+    nodes/*.h
+    scenes/*.h
 )
 
 add_library(${ENGINE_NAME}
@@ -35,7 +40,6 @@ endif()
 
 option(ENABLE_LOGGING "Enable logging with spdlog" ON)
 
-# usage : when building, cmake -B build -DENABLE_LOGGING=OFF
 if(ENABLE_LOGGING)
-    add_definitions(-DENABLE_LOGGING)
+    target_compile_definitions(${ENGINE_NAME} PUBLIC ENABLE_LOGGING)
 endif()

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <memory>
 #include "core/config/Engine.h"
 
@@ -7,9 +8,9 @@ public:
     Game();
     ~Game();
 
-    bool init();
-    void run();
+    bool Init();
+    void Run();
 
 private:
-    std::unique_ptr<Abstract2D::Engine> engine;
+    Abstract2D::Engine* m_engine = nullptr;
 };
