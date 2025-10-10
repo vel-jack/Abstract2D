@@ -1,30 +1,24 @@
 #pragma once
+
+#include <Windows.h>
+#include <GL/gl.h>
+#include <vector>
+#include <cmath>
 #include "math/Vector2.h"
 #include "graphics/Color.h"
-#include <iostream>
 
 namespace Abstract2D {
 
     class Renderer {
     public:
-        bool Init() {
-            std::cout << "[Renderer] Initialized.\n";
-            return true;
-        }
+        bool Init(int width, int height);
+        void BeginFrame();
+        void EndFrame();
+        void DrawCircle(const Vector2& pos, float radius, const Color& color);
 
-        void BeginFrame() {
-            std::cout << "[Renderer] Begin Frame.\n";
-        }
-
-        void EndFrame() {
-            std::cout << "[Renderer] End Frame.\n";
-        }
-
-        void DrawCircle(const Vector2& pos, float radius, const Color& color) {
-            std::cout << "[Renderer] DrawCircle at (" << pos.x << ", " << pos.y
-                << "), r=" << radius
-                << ", color=(" << color.r << "," << color.g << "," << color.b << ")\n";
-        }
+    private:
+        int m_width = 800;
+        int m_height = 600;
     };
 
 }

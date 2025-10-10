@@ -2,9 +2,10 @@
 
 #include <memory>
 #include <string>
-#include "core/config/Logger.h"
+#include "core/Logger.h"
 #include "graphics/Renderer.h"
 #include "scenes/Scene.h"
+#include "core/Window.h"
 
 namespace Abstract2D {
 
@@ -47,6 +48,8 @@ namespace Abstract2D {
 		ProjectSettings m_settings;
 		std::unique_ptr<Renderer> m_renderer;
 		std::shared_ptr<Scene> m_activeScene;
+		std::unique_ptr<Window> m_window;
+
 	};
 
 } // namespace Abstract2D

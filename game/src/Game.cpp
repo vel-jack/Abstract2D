@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "core/config/Logger.h"
+#include "core/Logger.h"
 #include "nodes/CircleNode.h"
 
 using namespace Abstract2D;
@@ -19,8 +19,10 @@ bool Game::Init() {
     }
     auto scene = std::make_shared<Scene>();
     auto redDot = std::make_shared<CircleNode>();
-    redDot->transform.position = { 0.0f, 0.0f };
-    redDot->radius = 0.25f;
+    redDot->transform.position = { 400.0f, 300.0f }; // middle of window
+    redDot->radius = 510.0f; // 50 pixels radius
+
+
 
     scene->AddNode(redDot);
     m_engine->SetActiveScene(scene);

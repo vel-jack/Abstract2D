@@ -8,8 +8,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_ANDROID "Build for android" OFF)
 option(BUILD_SHARED_LIBS "Build as shared library" OFF)
 
-include_directories(${CMAKE_SOURCE_DIR}/engine)
-
 add_subdirectory(engine)
-
 add_subdirectory(game)

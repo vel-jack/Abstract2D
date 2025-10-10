@@ -14,14 +14,20 @@ bool Engine::Init() {
     DEBUG_INFO("Resolution: {}x{}", m_settings.width, m_settings.height);
     DEBUG_INFO("VSync: {}", m_settings.vsync ? "Enabled" : "Disabled");
 
+    m_window = std::unique_ptr<Window>(Window::Create(m_settings.name, m_settings.width, m_settings.height, m_settings.vsync));
+    if (!m_window->Init(m_settings.name, m_settings.width, m_settings.height, m_settings.vsync)) {
+        DEBUG_ERROR("Failed to initialize window.");
+        return false;
+    }
+
     m_renderer = std::make_unique<Renderer>();
-    if (!m_renderer->Init()) {
+    if (!m_renderer->Init(m_settings.width, m_settings.height)) {
         DEBUG_ERROR("Renderer failed to initialize.");
         return false;
     }
 
     // Initialize core systems (placeholder)
-    // TODO: Window::Init(), Input::Init()
+    // TODO: Input::Init()
 
     m_isRunning = true;
     DEBUG_INFO("Engine initialized successfully.");
@@ -35,6 +41,8 @@ void Engine::Run() {
     auto lastTime = clock::now();
 
     while (m_isRunning) {
+        m_window->PollEvents();
+
         auto now = clock::now();
         std::chrono::duration<float> elapsed = now - lastTime;
         float deltaTime = elapsed.count();
@@ -49,13 +57,15 @@ void Engine::Run() {
             m_activeScene->Render(*m_renderer);
         m_renderer->EndFrame();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(16));
+        m_window->SwapBuffers();    
 
+        std::this_thread::sleep_for(std::chrono::milliseconds(16));
+            
         // Temporary quit condition (for debug)
-        static int frameCount = 0;
-        if (++frameCount > 300) { // Run ~5 seconds
-            Shutdown();
-        }
+        //static int frameCount = 0;
+        //if (++frameCount > 300) { // Run ~5 seconds
+        //    Shutdown();
+        //}
     }
 }
 

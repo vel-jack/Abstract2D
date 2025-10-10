@@ -6,10 +6,6 @@ file(GLOB_RECURSE GAME_SOURCES
 
 add_executable(${GAME_NAME} ${GAME_SOURCES})
 
-target_include_directories(${GAME_NAME} PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-
 target_link_libraries(${GAME_NAME}
     Abstract2DEngine
 )

@@ -1,1 +1,2 @@
 add_subdirectory(spdlog EXCLUDE_FROM_ALL)
+add_subdirectory(glfw EXCLUDE_FROM_ALL)

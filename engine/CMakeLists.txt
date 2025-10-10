@@ -3,6 +3,7 @@ set(ENGINE_NAME Abstract2DEngine)
 file(GLOB_RECURSE ENGINE_SOURCES
     core/*.cpp
     core/config/*.cpp
+    graphics/*.cpp
     nodes/*.cpp
     scenes/*.cpp
 )
@@ -29,6 +30,8 @@ add_subdirectory(thirdparty)
 
 target_link_libraries(${ENGINE_NAME}
     spdlog
+    glfw
+    opengl32
 )
 
 if(WIN32)
