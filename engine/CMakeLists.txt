@@ -28,7 +28,7 @@ target_include_directories(${ENGINE_NAME} PUBLIC
 
 add_subdirectory(thirdparty)
 
-target_link_libraries(${ENGINE_NAME}
+target_link_libraries(${ENGINE_NAME} PUBLIC
     spdlog
     glfw
     opengl32

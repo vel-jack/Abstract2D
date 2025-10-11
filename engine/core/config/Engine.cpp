@@ -58,14 +58,7 @@ void Engine::Run() {
         m_renderer->EndFrame();
 
         m_window->SwapBuffers();    
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(16));
-            
-        // Temporary quit condition (for debug)
-        //static int frameCount = 0;
-        //if (++frameCount > 300) { // Run ~5 seconds
-        //    Shutdown();
-        //}
+    
     }
 }
 

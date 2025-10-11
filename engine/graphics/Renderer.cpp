@@ -9,7 +9,8 @@ bool Renderer::Init(int width, int height) {
     m_height = height;
 
     // Background color
-    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    //color(srgb 0.97 0.95 0.94)
+    glClearColor(0.97f, 0.95f, 0.94f, 1.0f);
 
     // Set viewport and orthographic projection
     glViewport(0, 0, m_width, m_height);
