@@ -14,7 +14,7 @@ bool Engine::Init() {
     DEBUG_INFO("Resolution: {}x{}", m_settings.width, m_settings.height);
     DEBUG_INFO("VSync: {}", m_settings.vsync ? "Enabled" : "Disabled");
 
-    m_window = std::unique_ptr<Window>(Window::Create(m_settings.name, m_settings.width, m_settings.height, m_settings.vsync));
+    m_window = Window::Create();
     if (!m_window->Init(m_settings.name, m_settings.width, m_settings.height, m_settings.vsync)) {
         DEBUG_ERROR("Failed to initialize window.");
         return false;
@@ -67,7 +67,6 @@ void Engine::Shutdown() {
     DEBUG_INFO("Shutting down engine...");
     m_isRunning = false;
 
-    // TODO: Cleanup renderer, window, etc.
     m_window->Shutdown();
     m_renderer->Shutdown();
 

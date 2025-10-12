@@ -2,16 +2,18 @@
 #include "core/Logger.h"
 
 #ifdef PLATFORM_WINDOWS
-	#include <GLFW/glfw3.h>
+#include <GLFW/glfw3.h>
 #endif
 
 using namespace Abstract2D;
 
 namespace {
-	GLFWwindow* g_window = nullptr;
+
 }
 
-class GLFWWindow : public Window {
+class WindowsWindow : public Window {
+private:
+	GLFWwindow* m_window = nullptr;
 public:
 	bool Init(const std::string& title, int width, int height, bool vsync) override {
 		if (!glfwInit()) {
@@ -23,14 +25,14 @@ public:
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 		//glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
 
-		g_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-		if (!g_window) {
+		m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+		if (!m_window) {
 			DEBUG_ERROR("Failed to create window.");
 			glfwTerminate();
 			return false;
 		}
 
-		glfwMakeContextCurrent(g_window);
+		glfwMakeContextCurrent(m_window);
 		glfwSwapInterval(vsync ? 1 : 0);
 
 		//DEBUG_INFO("GLFW window created with OpenGL ES 2.0 context");
@@ -39,13 +41,13 @@ public:
 
 	void PollEvents() override { glfwPollEvents(); }
 
-	void SwapBuffers() override { glfwSwapBuffers(g_window); }
+	void SwapBuffers() override { glfwSwapBuffers(m_window); }
 
-	bool ShouldClose() const override { return glfwWindowShouldClose(g_window); }
+	bool ShouldClose() const override { return glfwWindowShouldClose(m_window); }
 
 	void Shutdown() const override {
-		if (g_window) {
-			glfwDestroyWindow(g_window);
+		if (m_window) {
+			glfwDestroyWindow(m_window);
 			DEBUG_INFO("GLFW Window destroyed..");
 		}
 		glfwTerminate();
@@ -54,6 +56,12 @@ public:
 	}
 };
 
-Window* Window::Create(const std::string& title, int width, int height, bool vsync) {
-	return new GLFWWindow();
+std::unique_ptr<Window> Window::Create() {
+#if defined(PLATFORM_WINDOWS) 
+	return std::make_unique<WindowsWindow>();
+#elif defined(PLATFORM_ANDROID)
+	return std::make_unique<AndroidWindow>();
+#else
+	static_assert(false, "Unsupported platform!");
+#endif
 }

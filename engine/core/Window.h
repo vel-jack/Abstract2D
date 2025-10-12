@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 namespace Abstract2D {
 
@@ -13,7 +14,7 @@ namespace Abstract2D {
         virtual void SwapBuffers() = 0;
         virtual bool ShouldClose() const = 0;
         virtual void Shutdown() const = 0;
-        static Window* Create(const std::string& title, int width, int height, bool vsync);
+        static std::unique_ptr<Window> Create();
     };
 
 }
