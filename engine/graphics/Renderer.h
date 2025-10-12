@@ -14,6 +14,7 @@ namespace Abstract2D {
         bool Init(int width, int height);
         void BeginFrame();
         void EndFrame();
+        void Shutdown();
         void DrawCircle(const Vector2& pos, float radius, const Color& color);
 
     private:

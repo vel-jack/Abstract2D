@@ -1,4 +1,6 @@
+#include "core/Logger.h"
 #include "graphics/Renderer.h"
+
 #include <iostream>
 #include <chrono>
 
@@ -47,6 +49,14 @@ void Renderer::EndFrame() {
         frameCount = 0;
         lastTime = now;
     }
+}
+
+void Abstract2D::Renderer::Shutdown()
+{
+    // todo: delete buf, vert, program..
+    // delete vao, vbo, framebuffer
+    glFinish();
+    DEBUG_INFO("Renderer Shutdown complete..");
 }
 
 void Renderer::DrawCircle(const Vector2& pos, float radius, const Color& color) {

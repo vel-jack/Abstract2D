@@ -12,7 +12,7 @@ namespace Abstract2D {
         virtual void PollEvents() = 0;
         virtual void SwapBuffers() = 0;
         virtual bool ShouldClose() const = 0;
-
+        virtual void Shutdown() const = 0;
         static Window* Create(const std::string& title, int width, int height, bool vsync);
     };
 

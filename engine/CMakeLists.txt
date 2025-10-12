@@ -1,19 +1,19 @@
 set(ENGINE_NAME Abstract2DEngine)
 
 file(GLOB_RECURSE ENGINE_SOURCES
+    components/*.cpp
     core/*.cpp
     core/config/*.cpp
     graphics/*.cpp
     nodes/*.cpp
-    scenes/*.cpp
 )
 
 file(GLOB_RECURSE ENGINE_HEADERS
+    components/*.h
     core/*.h
     graphics/*.h
     math/*.h
     nodes/*.h
-    scenes/*.h
 )
 
 add_library(${ENGINE_NAME}

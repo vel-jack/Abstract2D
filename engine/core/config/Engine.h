@@ -4,8 +4,8 @@
 #include <string>
 #include "core/Logger.h"
 #include "graphics/Renderer.h"
-#include "scenes/Scene.h"
 #include "core/Window.h"
+#include "nodes/Node.h"
 
 namespace Abstract2D {
 
@@ -36,7 +36,7 @@ namespace Abstract2D {
 		const ProjectSettings& GetProjectSettings() const { return m_settings; }
 
 		// Scene Management
-		void SetActiveScene(std::shared_ptr<Scene> scene) { m_activeScene = scene; }
+		void SetActiveScene(std::unique_ptr<Node> scene) { m_activeScene = std::move(scene); }
 
 
 	private:
@@ -47,7 +47,7 @@ namespace Abstract2D {
 		bool m_isRunning = false;
 		ProjectSettings m_settings;
 		std::unique_ptr<Renderer> m_renderer;
-		std::shared_ptr<Scene> m_activeScene;
+		std::unique_ptr<Node> m_activeScene;
 		std::unique_ptr<Window> m_window;
 
 	};

@@ -33,7 +33,7 @@ public:
 		glfwMakeContextCurrent(g_window);
 		glfwSwapInterval(vsync ? 1 : 0);
 
-		DEBUG_INFO("GLFW window created with OpenGL ES 2.0 context");
+		//DEBUG_INFO("GLFW window created with OpenGL ES 2.0 context");
 		return true;
 	}
 
@@ -42,6 +42,16 @@ public:
 	void SwapBuffers() override { glfwSwapBuffers(g_window); }
 
 	bool ShouldClose() const override { return glfwWindowShouldClose(g_window); }
+
+	void Shutdown() const override {
+		if (g_window) {
+			glfwDestroyWindow(g_window);
+			DEBUG_INFO("GLFW Window destroyed..");
+		}
+		glfwTerminate();
+		DEBUG_INFO("Window shutdown completed..");
+
+	}
 };
 
 Window* Window::Create(const std::string& title, int width, int height, bool vsync) {

@@ -1,7 +1,10 @@
 #pragma once
 #include <cmath>
 #include <ostream>
-
+// TODO:
+// ==, != operator overloading..
+// perpendicular, cross product
+// clamping..
 namespace Abstract2D {
 
 	struct Vector2 {

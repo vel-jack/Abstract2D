@@ -10,6 +10,7 @@ public:
 
     bool Init();
     void Run();
+    void Shutdown();
 
 private:
     Abstract2D::Engine* m_engine = nullptr;

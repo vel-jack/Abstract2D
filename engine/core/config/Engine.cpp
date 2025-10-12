@@ -40,7 +40,7 @@ void Engine::Run() {
     using clock = std::chrono::high_resolution_clock;
     auto lastTime = clock::now();
 
-    while (m_isRunning) {
+    while (m_isRunning && !m_window->ShouldClose()) {
         m_window->PollEvents();
 
         auto now = clock::now();
@@ -60,6 +60,7 @@ void Engine::Run() {
         m_window->SwapBuffers();    
     
     }
+    DEBUG_INFO("main loop finished...");
 }
 
 void Engine::Shutdown() {
@@ -67,6 +68,9 @@ void Engine::Shutdown() {
     m_isRunning = false;
 
     // TODO: Cleanup renderer, window, etc.
+    m_window->Shutdown();
+    m_renderer->Shutdown();
+
     DEBUG_INFO("Engine shutdown complete.");
 }
 
