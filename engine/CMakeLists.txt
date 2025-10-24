@@ -30,8 +30,6 @@ add_subdirectory(thirdparty)
 
 target_link_libraries(${ENGINE_NAME} PUBLIC
     spdlog
-    glfw
-    opengl32
 )
 
 if(WIN32)

@@ -1,5 +1,6 @@
 #pragma once
-#include "nodes/Node.h"
+
+#include "Node.h"
 
 namespace Abstract2D {
 

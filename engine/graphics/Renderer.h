@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Windows.h>
-#include <GL/gl.h>
 #include <vector>
 #include <cmath>
 #include "math/Vector2.h"
